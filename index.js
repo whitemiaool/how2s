@@ -87,18 +87,23 @@ function initS(el,str,id,top=0,left=0,res) {
 }
 
 window.onload = function() {
-    document.title = decodeURI(window.self.location.search.split('=')[1]);
+    let q = window.self.location.search.split('=')[1];
+    q = !!q?q:'警告!电脑将在1分钟内爆炸...'
+    document.title = decodeURI(q);
     setTimeout(()=>{
         initP('.po',25,450).then(()=>{
             return initL('.ht','https://www.google.com.hk',initS.bind(null,'.wrap','首先，输入Google网址','dx1',42,400),70)
         }).then(()=>{
             return initP('.po',244,260)
         }).then(()=>{
-            return initL('.in',decodeURI(window.self.location.search.split('=')[1]),initS.bind(null,'.wrap','其次，输入你的问题','dx2',262,184))
+            let str = window.self.location.search.split('=')[1];
+            str = !!str?str:'警告!电脑将在1分钟内爆炸...'
+            return initL('.in',decodeURI(q),initS.bind(null,'.wrap','其次，输入你的问题','dx2',262,184))
         }).then(()=>{
             initP('.po',300,428);
             setTimeout(()=>{
                 document.querySelector('.click').style.display = 'inherit'
+                document.querySelector('.sss').setAttribute('href',`https://www.google.com.hk/search?q=${q}`)
             },1000)
         })
     },200)
